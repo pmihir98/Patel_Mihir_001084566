@@ -27,6 +27,19 @@ public class VitalSignHistory {
         this.vitalSignHistory = vitalSignHistory;
     }
     
+     public VitalSigns addVitals() {
+    
+        VitalSigns vs = new VitalSigns();
+        vitalSignHistory.add(vs);
+        return vs;
+        
+    }
+    
+    public void deleteVitals(VitalSigns v){
+    
+        vitalSignHistory.remove(v);
+    }
+    
    
         
     

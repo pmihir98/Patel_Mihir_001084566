@@ -203,6 +203,7 @@ public class ViewVitalJPanel extends javax.swing.JPanel {
     private void btnviewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewDetailsActionPerformed
         // TODO add your handling code here:
         
+        
     }//GEN-LAST:event_btnviewDetailsActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

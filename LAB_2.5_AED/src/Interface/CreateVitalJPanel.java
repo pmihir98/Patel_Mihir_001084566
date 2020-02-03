@@ -127,6 +127,13 @@ public class CreateVitalJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        double temperature = Double.parseDouble(txtTemperature.getText());
+        double bp = Double.parseDouble(txtBloodPressure.getText());
+        int pulse = Integer.parseInt(txtPulse.getText());
+        String date = txtDate.getText();
+        
+        
+
         
         
     }//GEN-LAST:event_btnSaveActionPerformed

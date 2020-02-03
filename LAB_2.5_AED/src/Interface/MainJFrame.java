@@ -166,7 +166,13 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnabnormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabnormalActionPerformed
 
+         String maxbpstring = maxTextField.getText();
+        String minbpstring = minTextField.getText();
+        double maxbp = maxbpstring.equals("") ? Double.MAX_VALUE : Double.parseDouble(maxbpstring);
+        double minbp = minbpstring.equals("") ? Double.MIN_VALUE : Double.parseDouble(minbpstring);
         
+        AbnormalJPanel abnpanel = new AbnormalJPanel(vsh,maxbp,minbp);
+        SplitPane.setRightComponent(abnpanel);
         
     }//GEN-LAST:event_btnabnormalActionPerformed
 
