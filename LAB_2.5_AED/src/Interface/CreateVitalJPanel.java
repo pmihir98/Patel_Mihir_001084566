@@ -132,7 +132,16 @@ public class CreateVitalJPanel extends javax.swing.JPanel {
         int pulse = Integer.parseInt(txtPulse.getText());
         String date = txtDate.getText();
         
-        
+        VitalSigns v = vsh.addVitals();
+        v.setBloodPressure(bp);
+        v.setTemperature(temperature);
+        v.setPulse(pulse);
+        v.setDate(date);
+        JOptionPane.showMessageDialog(null,"Vital Sign added successfully"); 
+        txtBloodPressure.setText("");
+        txtDate.setText("");
+        txtPulse.setText("");
+        txtTemperature.setText("");
 
         
         

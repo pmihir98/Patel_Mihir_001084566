@@ -10,7 +10,10 @@ import Business.VitalSigns;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
+/**
+ *
+ * @author rmkap
+ */
 public class ViewVitalJPanel extends javax.swing.JPanel {
 
     /**
@@ -20,9 +23,29 @@ public class ViewVitalJPanel extends javax.swing.JPanel {
     public ViewVitalJPanel(VitalSignHistory vsh) {
         initComponents();
         this.vsh = vsh;
-        
+        populateTable();
     }
- 
+    public void populateTable(){
+    DefaultTableModel dtm = (DefaultTableModel)tblVitalSigns.getModel();
+    dtm.setRowCount(0);
+    
+    for (VitalSigns vs : vsh.getVitalSignHistory()){
+        
+        Object row[] = new Object[2];
+        row[0] = vs;
+        row[1] = vs.getBloodPressure();
+        dtm.addRow(row);    
+    }
+    }
+    
+    private void setFieldEnabled(boolean b){
+        
+        txtTemperature.setEnabled(b);
+        txtBloodPressure.setEnabled(b);
+        txtPulse.setEnabled(b);
+        txtDate.setEnabled(b);
+                
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,23 +225,77 @@ public class ViewVitalJPanel extends javax.swing.JPanel {
 
     private void btnviewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewDetailsActionPerformed
         // TODO add your handling code here:
-        
-        
+        int selectedrow = tblVitalSigns.getSelectedRow();
+        if(selectedrow >= 0){
+            VitalSigns vs = (VitalSigns)tblVitalSigns.getValueAt(selectedrow,0);
+            txtBloodPressure.setText(String.valueOf(vs.getBloodPressure()));
+            txtTemperature.setText(String.valueOf(vs.getTemperature()));
+            txtPulse.setText(String.valueOf(vs.getPulse()));
+            txtDate.setText(vs.getDate());
+        }
+        else
+            JOptionPane.showMessageDialog(null,"select row");
     }//GEN-LAST:event_btnviewDetailsActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int selectedrow = tblVitalSigns.getSelectedRow();
+        if(selectedrow >= 0)
+        {
+            VitalSigns vs = (VitalSigns)tblVitalSigns.getValueAt(selectedrow,0);
+             vsh.deleteVitals(vs);
+             JOptionPane.showMessageDialog(null,"vital sign deleted");
+             populateTable();
+        } 
+                
+        else
+            JOptionPane.showMessageDialog(null,"select row");
+        
+        
+        
+        
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
         // TODO add your handling code here:
-        
+        setFieldEnabled(true);
+        btnconfirm.setEnabled(true);
+
+        int selectRow = tblVitalSigns.getSelectedRow();
+
+        if(selectRow>=0){
+            VitalSigns vs= (VitalSigns)tblVitalSigns.getValueAt(selectRow,0);
+
+            txtTemperature.setText(vs.getTemperature()+"");
+            txtBloodPressure.setText(vs.getBloodPressure()+"");
+            txtPulse.setText(vs.getPulse()+"");
+            txtDate.setText(vs.getDate());
+
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Please select a row");
+        }
     }//GEN-LAST:event_btnupdateActionPerformed
 
     private void btnconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfirmActionPerformed
         // TODO add your handling code here:
-        
+        btnconfirm.setEnabled(true);
+        int selectRow = tblVitalSigns.getSelectedRow();
+        if(selectRow>=0){
+
+            VitalSigns vs = (VitalSigns)tblVitalSigns.getValueAt(selectRow,0);
+            vs.setTemperature(Double.parseDouble(txtTemperature.getText()));
+            vs.setBloodPressure(Double.parseDouble(txtBloodPressure.getText()));
+            vs.setPulse(Integer.parseInt(txtPulse.getText()));
+            vs.setDate(txtDate.getText());
+
+            JOptionPane.showMessageDialog(null,"vital signs successfully updated");
+            populateTable();
+            setFieldEnabled(false);
+            btnconfirm.setEnabled(false);
+        }
+        else JOptionPane.showMessageDialog(null,"Please select a row");
     }//GEN-LAST:event_btnconfirmActionPerformed
 
 

@@ -40,6 +40,18 @@ public class VitalSignHistory {
         vitalSignHistory.remove(v);
     }
     
+    public ArrayList<VitalSigns> getAbnormalList(double maxbp, double minbp){
+        ArrayList<VitalSigns> abnList = new ArrayList<>();
+        for(VitalSigns vs: vitalSignHistory) {
+            if(vs.getBloodPressure()>maxbp || vs.getBloodPressure()<minbp){
+                abnList.add(vs);
+                
+            }
+        }
+        return(abnList);
+        
+    
+    } 
    
         
     
