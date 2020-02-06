@@ -91,7 +91,7 @@ public class Patient {
     }
 
     public void setBp_int(int bp_int) {
-        bp.add(this.bp_int);
+        bp.add(bp_int);
         this.bp_int = bp_int;
     }
 

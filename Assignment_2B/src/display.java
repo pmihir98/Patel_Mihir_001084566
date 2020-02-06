@@ -25,8 +25,8 @@ public class display {
     while( i == 0){
             System.out.println("1. Create Patient Record");
             System.out.println("2. History of Patient");
-            System.out.println("3. Check whether p is abnormal or not");
-            System.out.println("4. Update p records");       
+            System.out.println("3. Check whether Patient is abnormal or not");
+            System.out.println("4. Update Patient records");       
             System.out.println("5. Exit here");
             
             a = sc.nextInt();
@@ -40,18 +40,20 @@ public class display {
             }
             
             else if (a==2){
-               // getHistory();
+
+               history();
+               
                 
-           
             } 
             
             else if (a == 3){
-               // checkVitals();
+             
+                chkVitalSigns(index);
                 
             }
             
             else if (a == 4){
-                //updateVitals();
+                updateInfo();
                 
             }
            
@@ -90,10 +92,13 @@ public class display {
         System.out.println("Enter Weight in Kilos : ");
         p[n].setWeight_kg_int(sc.nextInt());
         
+        System.out.println("Enter Weight in Pound : ");
+        p[n].setWieght_lb_int(sc.nextInt());
+        
         if (isPatientNormal(n)==true){
             System.out.println("Condition is normal");
         } else if (isPatientNormal(n)==false) {
-            System.out.println("Condition is anormal");
+            System.out.println("Condition is abnormal");
             
         }
         
@@ -102,20 +107,99 @@ public class display {
         
     }
     
-    void getHistroy(){
+        void history(){
         for(int i=1;i<=index;i++){
             
-        String string = p[i].getName();
-        System.out.println(i+" "+string);
+        String s=p[i].getName();
+        System.out.println(i+" "+s);
                          
         }
-       // int 
+        System.out.println("Enter Patient's Index:");
+            int k=sc.nextInt();
             
-           // getInformation(k);
+           getInfo(k);
+         
+        
+    }
+    
+   
+        
+        
+        void getInfo(int i){
+       System.out.println(p[i].getName());
+           
+       for(int l=0;l<p[i].getAge().size();l++){
+                System.out.println("Visit:"+(l+1)+":Age:"+p[i].age.get(l));
+                System.out.println("Visit:"+(l+1)+":Heart Rate:"+p[i].heart_rt.get(l));
+                System.out.println("Visit:"+(l+1)+":Respirotary Rate:"+p[i].resp_rt.get(l));
+                System.out.println("Visit:"+(l+1)+":Blood Pressure:"+p[i].bp.get(l));
+                System.out.println("Visit:"+(l+1)+":Weight in KGs:"+p[i].weight_kg.get(l));
+                System.out.println("Visit:"+(l+1)+":Weight in LBs:"+p[i].weight_lb.get(l));
+            }  
+   }
+        
+        
+    
+    
+    void updateInfo(){
+        int k;
+            for(int i=1;i<=index;i++){
+            
+            
+            System.out.println(i+" "+p[i].getName());
+  
+            
+        }       
+            System.out.println("Enter Patient's Index:");
+             k=sc.nextInt();
+            updatePatient(k);
+    }
+    
+    void updatePatient(int m){
+        
+        System.out.println("Enter the new age of Person:");
+        p[m].setAge_int(sc.nextInt());
+        
+        System.out.println("Enter the new Respiratory Rate:");
+        p[m].setResp_rt_int(sc.nextInt());
+        
+        System.out.println("Enter the new Blood Pressure:");
+        p[m].setBp_int(sc.nextInt());
+        
+        System.out.println("Enter the new Heart Rate:");
+        p[m].setHeart_rt_int(sc.nextInt());
+        
+        System.out.println("Enter the new Weight(Kgs):");
+        p[m].setWeight_kg_int(sc.nextInt());
+        
+        System.out.println("Enter the new Weight(lbs):");
+        p[m].setWieght_lb_int(sc.nextInt());
+    
+        
+        if (isPatientNormal(m)==true){
+            System.out.println("Condition is normal");
+        } else if (isPatientNormal(m)==false) {
+            System.out.println("Condition is abnormal");
+            
+        }
+        
+    }
+    
+    void checkAbnormal(){
+        int z;
+          
+        for(int i=1;i<=index;i++){
+            System.out.println(i+" "+p[i].getName());
+            }
+          
+          System.out.println("Enter Patient's Index:");
+             z=sc.nextInt();
+             chkVitalSigns(z);
+          
     }
     
     
-    void checkVitalSigns(int o){
+    void chkVitalSigns(int o){
         
         String sgn=new String();
         int xy =0; 
@@ -130,54 +214,59 @@ public class display {
            
             int res_rate= sc.nextInt();
            
-            if(checkRes_rate(p[o].getAge_int(),res_rate)==false){
+            if(checkRes_rate(p[o].getResp_rt_int(),res_rate)==false){
                 System.out.println("----------ABNORMAL-----------");
                 xy++;
-            }else if(checkRes_rate(p[o].getAge_int(),res_rate)==true){
+            }else if(checkRes_rate(p[o].getResp_rt_int(),res_rate)==true){
                 System.out.println("=========Normal============");
                 xy++;
             }          
-        }else  if (sgn.equals("Heart_Rate")==true) {
+        }
+        else  if (sgn.equals("Heart_Rate")==true) {
             System.out.println("Enter Heart Rate to check:");
             int heart_rate=sc.nextInt();
-            if(checkHeart_rate(p[o].getAge_int(),heart_rate)==false){
+            if(checkHeart_rate(p[o].getHeart_rt_int(),heart_rate)==false){
                 System.out.println("----------ABNORMAL-----------");
                 xy++;
-            }else if(checkHeart_rate(p[o].getAge_int(),heart_rate)==true){
+            }else if(checkHeart_rate(p[o].getHeart_rt_int(),heart_rate)==true){
                 System.out.println("=========Normal============");
                 xy++;
             }          
-        }else  if (sgn.equals("Blood_Pressure")==true) {
+        }
+        else  if (sgn.equals("Blood_Pressure")==true) {
             System.out.println("Enter Respiratory Rate to check:");
             int bp=sc.nextInt();
-            if(checKbp(p[o].getAge_int(),bp)==false){
+            if(checKbp(p[o].getBp_int(),bp)==false){
                 System.out.println("----------ABNORMAL-----------");
                 xy++;
-            }else if(checKbp(p[o].getAge_int(),bp)==true){
+            }else if(checKbp(p[o].getBp_int(),bp)==true){
                 System.out.println("=========Normal============");
                 xy++;
             }          
-        }else  if (sgn.equals("Weight_in_Kgs")==true) {
+        }
+        else  if (sgn.equals("Weight_in_Kgs")==true) {
             System.out.println("Enter Weigth in KG to check:");
             int weight=sc.nextInt();
-            if(checkWeight_kg(p[o].getAge_int(),weight)==false){
+            if(checkWeight_kg(p[o].getWeight_kg_int(),weight)==false){
                 System.out.println("----------ABNORMAL-----------");
                 xy++;
-            }else if(checkWeight_kg(p[o].getAge_int(),weight)==true){
+            }else if(checkWeight_kg(p[o].getWeight_kg_int(),weight)==true){
                 System.out.println("=========Normal============");
                 xy++;
             }          
-        }else  if (sgn.equals("Weight_in_Pounds")==true) {
+        }
+        else  if (sgn.equals("Weight_in_Pounds")==true) {
             System.out.println("Enter Respiratory Rate to check:");
             int weight_lbs=sc.nextInt();
-            if(checKWeight_Lb(p[o].getAge_int(),weight_lbs)==false){
+            if(checKWeight_Lb(p[o].getWieght_lb_int(),weight_lbs)==false){
                 System.out.println("----------ABNORMAL-----------");
                 xy++;
-            }else if(checKWeight_Lb(p[o].getAge_int(),weight_lbs)==true){
+            }else if(checKWeight_Lb(p[o].getWieght_lb_int(),weight_lbs)==true){
                 System.out.println("=========Normal============");
                 xy++;
             }          
-        }else{
+        }
+        else{
             System.out.println("Incorrect Input \n Please enter again!!!");
         }
     }
@@ -267,41 +356,41 @@ public class display {
         return true;
 
     }
-    boolean checKbp(int age, int stolicBP) {
+    boolean checKbp(int age, int bp) {
 
         if (age == 0) {
-            if (stolicBP >= 50 && stolicBP <= 70) {
+            if (bp >= 50 && bp <= 70) {
                 return true;
             } else {
                 return false;
             }
 
         } else if (age > 0 && age <= 1) {
-            if (stolicBP >= 70 && stolicBP <= 100) {
+            if (bp >= 70 && bp <= 100) {
                 return true;
             } else {
                 return false;
             }
         } else if (age > 1 && age <= 3) {
-            if (stolicBP >= 80 && stolicBP <= 110) {
+            if (bp >= 80 && bp <= 110) {
                 return true;
             } else {
                 return false;
             }
         } else if (age > 3 && age <= 5) {
-            if (stolicBP >= 80 && stolicBP <= 110) {
+            if (bp >= 80 && bp <= 110) {
                 return true;
             } else {
                 return false;
             }
         } else if (age >= 6 && age <= 12) {
-            if (stolicBP >= 80 && stolicBP <= 120) {
+            if (bp >= 80 && bp <= 120) {
                 return true;
             } else {
                 return false;
             }
         } else if (age >= 13) {
-            if (stolicBP >= 110 && stolicBP <= 120) {
+            if (bp >= 110 && bp <= 120) {
                 return true;
             } else {
                 return false;
