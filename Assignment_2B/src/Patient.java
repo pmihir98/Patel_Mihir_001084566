@@ -19,8 +19,16 @@ public class Patient {
     int heart_rt_int;
     int bp_int;
     int age_int;
-     String name;
-     
+    String name;
+    
+    ArrayList<Integer> age = new ArrayList<>(100);
+    ArrayList<Integer> weight_kg = new ArrayList<>(100);
+    ArrayList<Integer> weight_lb = new ArrayList<>(100);
+    ArrayList<Integer> resp_rt = new ArrayList<>(100);
+    ArrayList<Integer> heart_rt = new ArrayList<>(100);
+    ArrayList<Integer> bp = new ArrayList<>(100);
+    
+    String str = new String();
     public int getAge_int() {
         return age_int;
     }
@@ -39,14 +47,7 @@ public class Patient {
         this.name = name;
     }
     
-    ArrayList<Integer> age = new ArrayList<>(100);
-    ArrayList<Integer> weight_kg = new ArrayList<>(100);
-    ArrayList<Integer> weight_lb = new ArrayList<>(100);
-    ArrayList<Integer> resp_rt = new ArrayList<>(100);
-    ArrayList<Integer> heart_rt = new ArrayList<>(100);
-    ArrayList<Integer> bp = new ArrayList<>(100);
     
-    String str = new String();
 
     public int getWeight_kg_int() {
         return weight_kg_int;
