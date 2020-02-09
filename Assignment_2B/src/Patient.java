@@ -14,9 +14,20 @@ import java.util.ArrayList;
 public class Patient {
     
     int weight_kg_int;
-    int weight_lb_int;
+ //   int weight_lb_int;
+    int w;
     int resp_rt_int;
     int heart_rt_int;
+
+    public int getW() {
+        return w;
+    }
+
+    public void setW(int w) {
+        weight_lb.add(w);
+                
+        this.w = w;
+    }
     int bp_int;
     int age_int;
     String name;
@@ -58,7 +69,7 @@ public class Patient {
         this.weight_kg_int = weight_kg_int;
     }
 
-    public int getWieght_lb_int() {
+  /*  public int getWieght_lb_int() {
         return weight_lb_int;
     }
 
@@ -67,7 +78,7 @@ public class Patient {
         weight_lb.add(weight_lb_int);
         this.weight_lb_int = wieght_lb_int;
     }
-
+*/
     public int getResp_rt_int() {
         return resp_rt_int;
     }

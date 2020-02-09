@@ -41,19 +41,19 @@ public class display {
             
             else if (a==2){
 
-               history();
+          //     history();
                
                 
             } 
             
             else if (a == 3){
              
-                chkVitalSigns(index);
+           //     chkVitalSigns(index);
                 
             }
             
             else if (a == 4){
-                updateInfo();
+           //     updateInfo();
                 
             }
            
@@ -93,21 +93,22 @@ public class display {
         p[n].setWeight_kg_int(sc.nextInt());
         
         System.out.println("Enter Weight in Pound : ");
-        p[n].setWieght_lb_int(sc.nextInt());
+        p[n].setW(sc.nextInt());
+        System.out.println(p[n].weight_lb.get(0));
         
-        if (isPatientNormal(n)==true){
-            System.out.println("Condition is normal");
-        } else if (isPatientNormal(n)==false) {
-            System.out.println("Condition is abnormal");
+     //   if (isPatientNormal(n)==true){
+       //     System.out.println("Condition is normal");
+     //   } else if (isPatientNormal(n)==false) {
+       //     System.out.println("Condition is abnormal");
             
-        }
+       // }
         
         
         
         
     }
     
-        void history(){
+     /*   void history(){
         for(int i=1;i<=index;i++){
             
         String s=p[i].getName();
@@ -561,7 +562,7 @@ public class display {
     }
         
             
-     
+     */
 }       
 
 
