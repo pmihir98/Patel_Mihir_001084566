@@ -138,50 +138,7 @@ public class CreateProductJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        Product prod = prodDir.addProduct();
-         String name = txtProdName.getText();
-            if(name==null || name.equals("")){ 
-                JOptionPane.showMessageDialog(null,"enter valid name");
-                return;
-    
-                }
-            prod.setName(txtProdName.getText());
-            try{
-            Double.parseDouble(txtPrice.getText());}
-        catch(NumberFormatException e){
-        JOptionPane.showMessageDialog(null,"please enter a valid price input");
-        return;
-        }
-            
-             String avail = txtAvailablity.getText();
-            if(avail == null || avail.equals("")){ 
-                JOptionPane.showMessageDialog(null,"enter availablity");
-                return;
-    
-                }
-            
-            
-            
-           try{
-            Integer.parseInt(txtAvailablity.getText());}
-        catch(NumberFormatException e){
-        JOptionPane.showMessageDialog(null,"please enter a valid availablity input");
-        return;
-        }
-            
-            
-            
-           
-            prod.setAvailNum(Integer.parseInt(txtAvailablity.getText()));
-            prod.setPrice(Double.parseDouble(txtPrice.getText()));
-            prod.setDescription(txtDescription.getText());
-            
-            JOptionPane.showMessageDialog(null, "Product Created Successfully");
-            
-            txtProdName.setText("");
-            txtPrice.setText("");
-            txtAvailablity.setText("");
-            txtDescription.setText("");
+        
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
