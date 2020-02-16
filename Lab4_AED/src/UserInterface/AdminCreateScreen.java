@@ -5,11 +5,13 @@
  */
 package UserInterface;
 
+import Business.Abstract.User;
 import Business.Users.Admin;
 import Business.Users.Customer;
 import Business.Users.Supplier;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -20,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 
 /**
  *
@@ -154,25 +157,53 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         String p1 = txtPword.getText();
         String p2 = txtRePword.getText();
         
-        if(username==null || username==""){
-            JOptionPane.showMessageDialog(null, "Username is empty here !");
+        if(username == null || username == ""){
+            JOptionPane.showMessageDialog(null,"username is empty");
+            return;    
         }
         
-            if(!usernamePatterCorrect()){
+        
+        
+            if(!usernamePatternCorrect()){
                 txtUser.setBorder(BorderFactory.createLineBorder(Color.red));
-                JOptionPane.showMessageDialog(null, "Username pattern is incorrect");
-            }
+            JOptionPane.showMessageDialog(null,"username patttern incorrect");
+            return;
+        }
+        if(!pwordPatternCorrect()){
+            txtPword.setBorder(BorderFactory.createLineBorder(Color.red));
+            JOptionPane.showMessageDialog(null,"password pattern incorrect");
+            return;
+        }
+        if(!p1.equals(p2)) {
+            JOptionPane.showMessageDialog(null,"password do not match");
+            return;
+        } 
+        if(p1 == null || p2 == ""){
+            JOptionPane.showMessageDialog(null,"password cannot be empty");
+            return;
+        }
+         if(radioSupplier.isSelected()){
+            admin.getSuppDir().getSupplierList().add(new Supplier(p1, username));
+            JOptionPane.showMessageDialog(panelRight, "Supplier created successfully");
+            toMainScreen();
             
-            if()
-        //if(p1 ==null || p2=  ""){
-         //   JOptionPane.showMessageDialog(null,"password cannot be empty" );
             
-      //  }
+            
+        }
+         if(radioCustomer.isSelected()){
+            admin.getCustDir().getCustomerList().add(new Customer(p1, username));
+            JOptionPane.showMessageDialog(panelRight, "Customer created successfully");
+            long millis=System.currentTimeMillis();
+        Date dates = new java.util.Date(millis);
+        User.setDate(dates);
+            toMainScreen(); }
+            
+            
             
     }//GEN-LAST:event_btnCreateActionPerformed
 
     // Check for username regex
-    private boolean usernamePatterCorrect(){
+    private boolean usernamePatternCorrect(){
         Pattern p = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
         Matcher m = p.matcher(txtUser.getText());
         boolean b = m.matches();
@@ -187,7 +218,22 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         return b;
     }
     
-    
+    // Display main screen
+    private void toMainScreen(){
+       CardLayout layout = (CardLayout)this.panelRight.getLayout();
+        this.panelRight.remove(this);
+        Component[] comps = this.panelRight.getComponents();
+        for(Component comp : comps){
+            if(comp instanceof AdminMainScreen){
+                AdminMainScreen panel =(AdminMainScreen)comp;
+                panel.populate();
+                panel.populateCustomer();
+                
+            }
+        }
+        layout.previous(panelRight);
+        
+    }
     
     
     

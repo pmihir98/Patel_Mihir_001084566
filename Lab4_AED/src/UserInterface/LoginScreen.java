@@ -24,10 +24,13 @@ public class LoginScreen extends javax.swing.JPanel {
      */
     List<User> list;
     JPanel panelRight;
-    public LoginScreen(JPanel panelRight, List<User> list) {
+    String role;
+    
+    public LoginScreen(String supplier, JPanel panelRight, List<User> list) {
         initComponents();
         this.list = list;
         this.panelRight = panelRight;
+        this.role = supplier;
         initialize();
     }
 
@@ -97,20 +100,83 @@ public class LoginScreen extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        String password = txtPword.getText();
+        if(password ==  null || password == ""){
+          JOptionPane.showMessageDialog(null, "password cannot be empty");
+          return;
+         }
+        User u = (User) comboUser.getSelectedItem();
         
+        
+      if(u!=null){
+           if(u.getRole() == "CUSTOMER"){
+          Customer c = (Customer) u;
+          
+          if(!c.verify(password)){
+          JOptionPane.showMessageDialog(null,"not a valid user");
+          return;
+          }
+          
+          else
+              grantAccess(u);
+          }
+          
+          if(u.getRole() == "SUPPLIER"){
+          Supplier s = (Supplier) u;
+          
+          if(!s.verify(password)){
+          JOptionPane.showMessageDialog(null,"not  a valid user");
+          return;
+          }
+          else
+              grantAccess(u);
+          }
+          
+         
+      }
+        
+        
+        
+        
+        
+        
+        
+        
+
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtPwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPwordActionPerformed
 
+    private void grantAccess(User u){
+        SuccessScreen ss = new SuccessScreen(u);
+        CardLayout layout = (CardLayout) panelRight.getLayout();
+        panelRight.add(ss);
+        layout.next(panelRight);
+        
+    }
     
     private void initialize(){
         //text should either be "Supplier Login Screen" OR "Customer Login Screen"
         //Based on the selection
         txtTitle.setText("****** Login Screen");
         comboUser.removeAllItems();
+        if(role.equalsIgnoreCase("supplier")){
+            txtTitle.setText("Supplier login Screen here");
+            
+        }
+        if(role.equalsIgnoreCase("Customer")){
+            txtTitle.setText("Customer login Screen here");
+            
+        }
+        
+        comboUser.removeAllItems();
+        for(User user : list){
+            comboUser.addItem(user);
+        }
         //only customer or suppliers should be listed based on the selection
+        
     }
     
 

@@ -29,6 +29,7 @@ public class AdminMainScreen extends javax.swing.JPanel {
         this.panelRight = panelRight;
         this.admin = admin;
         populate();
+        populateCustomer();
     }
 
     /**
@@ -110,6 +111,18 @@ public class AdminMainScreen extends javax.swing.JPanel {
         layout.next(panelRight);
     }//GEN-LAST:event_btnCreateActionPerformed
 
+    public void populateCustomer(){
+        DefaultTableModel dtm = (DefaultTableModel)tableCust.getModel();
+        dtm.setRowCount(0);
+        for(User u : admin.getCustDir().getCustomerList()){
+            Customer c = (Customer)u;
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0] = c;
+            row[1] = String.valueOf(User.getDate());
+            dtm.addRow(row);
+            
+        }
+    }
 
     public void populate(){
         DefaultTableModel dtm = (DefaultTableModel)tableSup.getModel();

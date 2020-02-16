@@ -26,7 +26,7 @@ public class SupplierDirectory {
         return supplierList;
     }
 
-    public void setSupplierList(List<User> supplierList) {
+    public void setSupplierList(ArrayList<User> supplierList) {
         this.supplierList = supplierList;
     }
     

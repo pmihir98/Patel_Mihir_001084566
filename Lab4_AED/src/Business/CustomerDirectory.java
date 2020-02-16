@@ -26,7 +26,7 @@ public class CustomerDirectory {
         return customerList;
     }
 
-    public void setCustomerList(List<User> supplierList) {
+    public void setCustomerList(ArrayList<User> supplierList) {
         this.customerList = supplierList;
     }
     
